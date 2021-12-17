@@ -1,13 +1,18 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import Layout from './Layout/Layout';
+import CartPage from './Pages/CartPage';
 import HomePage from './Pages/HomePage';
 
 const App = () => {
    return (
       <div className="App">
-         <Routes>
-            <Route path="/" element={<HomePage />} />
-         </Routes>
+         <Layout>
+            <Routes>
+               <Route path="/" element={<HomePage />} />
+               <Route path="/cart" element={<CartPage />} />
+            </Routes>
+         </Layout>
       </div>
    );
 };

@@ -13,3 +13,34 @@ body {
 .App {
    text-align: center;
 }
+
+.productList {
+   border-radius: 5px;
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+   gap: 5rem;
+   width: 90vw;
+   max-width: 1170px;
+}
+
+.product {
+   border-radius: 5px;
+   display: flex;
+   flex-direction: column;
+}
+
+.productDesc {
+   padding: 10px;
+   display: flex;
+   justify-content: space-between;
+}
+
+.productImg img {
+   width: 100%;
+   height: auto;
+}
+
+.container {
+   display: flex;
+   justify-content: center;
+}
