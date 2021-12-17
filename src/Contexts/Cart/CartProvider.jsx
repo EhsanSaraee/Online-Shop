@@ -13,9 +13,9 @@ const CartProvider = ({ children }) => {
    const [cart, dispatch] = useReducer(cartReducer, initialState);
    return (
       <CartContext.Provider value={cart}>
-         <CartContextDispatcher value={dispatch}>
+         <CartContextDispatcher.Provider value={dispatch}>
             {children}
-         </CartContextDispatcher>
+         </CartContextDispatcher.Provider>
       </CartContext.Provider>
    );
 };
