@@ -1,10 +1,24 @@
-import Layout from '../Layout/Layout';
+import { products } from '../data';
 
 const HomePage = () => {
    return (
-      <Layout>
-         <h2>this is home page</h2>
-      </Layout>
+      <main className="container">
+         <section className="productList">
+            {products.map((product) => {
+               return (
+                  <section className="product" key={product.name}>
+                     <div className="productImg">
+                        <img src={product.image} alt={product.name} />
+                     </div>
+                     <div className="productDesc">
+                        <p>{product.name}</p>
+                        <p>${product.price}</p>
+                     </div>
+                  </section>
+               );
+            })}
+         </section>
+      </main>
    );
 };
 
