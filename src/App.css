@@ -44,3 +44,18 @@ body {
    display: flex;
    justify-content: center;
 }
+
+.btn {
+   border: none;
+   outline: none;
+   border-radius: 5px;
+   padding: 6px 12px;
+   cursor: pointer;
+   background-color: #ede9fe;
+   color: #6d28d9;
+}
+
+.primary {
+   background-color: #6d28d9;
+   color: #fff;
+}

@@ -1,6 +1,9 @@
 import { products } from '../data';
 
 const HomePage = () => {
+   const addProductHandler = (product) => {
+      console.log(product);
+   };
    return (
       <main className="container">
          <section className="productList">
@@ -13,6 +16,9 @@ const HomePage = () => {
                      <div className="productDesc">
                         <p>{product.name}</p>
                         <p>${product.price}</p>
+                        <button className='btn primary' onClick={() => addProductHandler(product)}>
+                           Add to Cart
+                        </button>
                      </div>
                   </section>
                );
