@@ -1,24 +1,33 @@
-import { useCart } from '../../Contexts/Cart/CartProvider';
+import { useCart, useCartDispatch } from '../../Contexts/Cart/CartProvider';
 import './CartPage.css';
 
 const CartPage = () => {
    const { cart } = useCart();
+   const dispatch = useCartDispatch();
+
+   const increment = (cartItem) => {
+      dispatch({ type: 'ADD_TO_CART', payload: cartItem });
+   };
+
+   const decrement = (cartItem) => {
+      dispatch({ type: 'REMOVE_FROM_CART', payload: cartItem });
+   };
 
    return (
       <main className="container">
          <section className="cartContainer">
             <section className="cartItemList">
-               {cart?.map(({ name, image, price, quantity, id }) => (
-                  <div className="cartItem" key={id}>
+               {cart?.map((item) => (
+                  <div className="cartItem" key={item.id}>
                      <div className="cartImg">
-                        <img src={image} alt={name} />
+                        <img src={item.image} alt={item.name} />
                      </div>
-                     <div>{name}</div>
-                     <div>{price * quantity}</div>
+                     <div>{item.name}</div>
+                     <div>{item.price * item.quantity}</div>
                      <div>
-                        <button>Remove</button>
-                        <button>{quantity}</button>
-                        <button>Add</button>
+                        <button onClick={() => decrement(item)}>Remove</button>
+                        <button>{item.quantity}</button>
+                        <button onClick={() => increment(item)}>Add</button>
                      </div>
                   </div>
                ))}
