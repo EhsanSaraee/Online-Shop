@@ -1,4 +1,4 @@
-const Checkout = () => {
+const CheckoutPage = () => {
    return (
       <>
          <h2>Checkout Page</h2>
@@ -6,4 +6,4 @@ const Checkout = () => {
    );
 };
 
-export default Checkout;
+export default CheckoutPage;
