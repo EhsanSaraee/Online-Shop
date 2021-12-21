@@ -1,9 +1,14 @@
-import { useCartDispatch } from '../Contexts/Cart/CartProvider';
+import { toast } from 'react-toastify';
+import { useCart, useCartDispatch } from '../Contexts/Cart/CartProvider';
 import { products } from '../data';
+import { checkCart } from '../Helpers/checkCart';
 
 const HomePage = () => {
    const dispatch = useCartDispatch();
+   const { cart } = useCart();
+
    const addProductHandler = (product) => {
+      toast.success(`${product.name} added to cart`);
       dispatch({ type: 'ADD_TO_CART', payload: product });
    };
    return (
@@ -22,7 +27,9 @@ const HomePage = () => {
                            className="btn primary"
                            onClick={() => addProductHandler(product)}
                         >
-                           Add to Cart
+                           {checkCart(cart, product)
+                              ? 'In Cart'
+                              : 'Add to Cart'}
                         </button>
                      </div>
                   </section>
