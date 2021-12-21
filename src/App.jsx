@@ -5,9 +5,9 @@ import Layout from './Layout/Layout';
 import CartPage from './Pages/CartPage/CartPage';
 import HomePage from './Pages/HomePage';
 import 'react-toastify/dist/ReactToastify.css';
-import Checkout from './Pages/Checkout/Checkout';
-import Login from './Pages/Login/Login';
-import SignUp from './Pages/SignUp/SignUp';
+import LoginPage from './Pages/LoginPage/LoginPage';
+import SignUpPage from './Pages/SignUpPage/SignUpPage';
+import CheckoutPage from './Pages/CheckoutPage/CheckoutPage';
 
 const App = () => {
    return (
@@ -17,9 +17,9 @@ const App = () => {
             <Routes>
                <Route path="/" element={<HomePage />} />
                <Route path="/cart" element={<CartPage />} />
-               <Route path="/checkout" element={<Checkout />} />
-               <Route path="/login" element={<Login />} />
-               <Route path="/sign-up" element={<SignUp />} />
+               <Route path="/checkout" element={<CheckoutPage />} />
+               <Route path="/login" element={<LoginPage />} />
+               <Route path="/sign-up" element={<SignUpPage />} />
             </Routes>
          </Layout>
       </>

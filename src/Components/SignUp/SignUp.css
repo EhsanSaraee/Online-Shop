@@ -1,0 +1,11 @@
+.formContainer {
+   display: flex;
+   justify-content: center;
+   margin-top: 20px;
+}
+
+.formContainer button {
+   width: 100%;
+}
+
+
