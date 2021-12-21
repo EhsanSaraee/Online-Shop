@@ -10,10 +10,6 @@ body {
    background-color: #f6f6f6;
 }
 
-.App {
-   text-align: center;
-}
-
 .productList {
    border-radius: 5px;
    display: grid;
