@@ -36,10 +36,26 @@
    padding: 1rem;
 }
 
+.cartSummary h2 {
+   margin-bottom: 30px;
+}
+
 .cartContainer {
    display: flex;
    width: 90vw;
    max-width: 1170px;
    justify-content: center;
    margin-top: 50px;
+}
+
+.summaryItem {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   margin-bottom: 10px;
+}
+
+.summaryItem.net {
+   border-top: 1px solid #ccc;
+   padding-top: 3px;
 }

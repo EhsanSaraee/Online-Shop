@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
    return (
-      <div className="App">
+      <>
          <Layout>
             <ToastContainer />
             <Routes>
@@ -16,7 +16,7 @@ const App = () => {
                <Route path="/cart" element={<CartPage />} />
             </Routes>
          </Layout>
-      </div>
+      </>
    );
 };
 
