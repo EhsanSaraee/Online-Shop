@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useCart, useCartDispatch } from '../../Contexts/Cart/CartProvider';
 import './CartPage.css';
 
@@ -13,6 +14,10 @@ const CartPage = () => {
       dispatch({ type: 'REMOVE_FROM_CART', payload: cartItem });
    };
 
+   if (!cart.length) {
+      return <h2>Cart is Empty</h2>;
+   }
+
    return (
       <main className="container">
          <section className="cartContainer">
@@ -24,10 +29,10 @@ const CartPage = () => {
                      </div>
                      <div>{item.name}</div>
                      <div>{item.offPrice * item.quantity}</div>
-                     <div>
-                        <button onClick={() => decrement(item)}>Remove</button>
+                     <div className="btnGroup">
+                        <button onClick={() => decrement(item)}>-</button>
                         <button>{item.quantity}</button>
-                        <button onClick={() => increment(item)}>Add</button>
+                        <button onClick={() => increment(item)}>+</button>
                      </div>
                   </div>
                ))}
@@ -59,6 +64,14 @@ const CartSummary = ({ cart, total }) => {
             <p>Total Price</p>
             <p>${total}</p>
          </div>
+         <Link to="/checkout">
+            <button
+               className="btn primary"
+               style={{ marginTop: '20px', width: '100%' }}
+            >
+               Go to Checkout
+            </button>
+         </Link>
       </section>
    );
 };
