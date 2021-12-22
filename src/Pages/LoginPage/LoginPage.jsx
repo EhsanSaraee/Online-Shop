@@ -1,7 +1,9 @@
+import Login from '../../Components/Login/Login';
+
 const LoginPage = () => {
    return (
       <>
-         <h2>Login Page</h2>
+         <Login />
       </>
    );
 };
