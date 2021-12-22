@@ -2,14 +2,11 @@ import { useFormik } from 'formik';
 import { Link } from 'react-router-dom';
 import * as yup from 'yup';
 import Input from '../../Common/Input/Input';
-import './SignUp.css';
+import './login.css';
 
 const initialValues = {
-   name: '',
    email: '',
    password: '',
-   passwordConfirm: '',
-   phoneNumber: '',
 };
 
 const onSubmit = (values) => {
@@ -17,24 +14,11 @@ const onSubmit = (values) => {
 };
 
 const validationSchema = yup.object({
-   name: yup
-      .string()
-      .required('Name is Required')
-      .min(6, 'Name length is not valid'),
    email: yup.string().email('Invalid Email').required('Email is Required'),
    password: yup.string().required('Password is Required'),
-   passwordConfirm: yup
-      .string()
-      .required('Password Confirmation is Required')
-      .oneOf([yup.ref('password'), null], 'Passwords must match'),
-   phoneNumber: yup
-      .string()
-      .required('Phone Number is Required')
-      .matches(/^[0-9]{11}$/, 'Invalid phone number')
-      .nullable(),
 });
 
-const SignUp = () => {
+const Login = () => {
    const formik = useFormik({
       initialValues,
       onSubmit,
@@ -44,39 +28,26 @@ const SignUp = () => {
    return (
       <section className="formContainer">
          <form>
-            <Input formik={formik} type="text" name="name" label="Name" />
             <Input formik={formik} type="email" name="email" label="Email" />
-            <Input
-               formik={formik}
-               type="tel"
-               name="phoneNumber"
-               label="Phone Number"
-            />
             <Input
                formik={formik}
                type="password"
                name="password"
                label="Password"
             />
-            <Input
-               formik={formik}
-               type="password"
-               name="passwordConfirm"
-               label="Password Confirm"
-            />
             <button
                type="submit"
                disabled={!formik.isValid}
                className="btn primary"
             >
-               Submit
+               Login
             </button>
-            <Link to="/login">
-               <p style={{ marginTop: '10px' }}>Already Registered ?</p>
+            <Link to="/sign-up">
+               <p style={{ marginTop: '10px' }}>Not Registered ?</p>
             </Link>
          </form>
       </section>
    );
 };
 
-export default SignUp;
+export default Login;
