@@ -1,7 +1,9 @@
+import Checkout from '../../Components/Checkout/Checkout';
+
 const CheckoutPage = () => {
    return (
       <>
-         <h2>Checkout Page</h2>
+         <Checkout />
       </>
    );
 };
