@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import Input from '../../Common/Input/Input';
+import { useAuthDispatch } from '../../Contexts/Auth/AuthProvider';
+import { useQuery } from '../../Hooks/useQuery';
 import { loginUser } from '../../Services/loginServices';
 import './login.css';
 
@@ -19,12 +21,16 @@ const validationSchema = yup.object({
 const Login = () => {
    const [error, setError] = useState(null);
    const navigate = useNavigate();
+   const setAuth = useAuthDispatch();
+   const query = useQuery();
+   const redirect = query.get('redirect') || '/';
 
    const onSubmit = async (values) => {
       try {
          const { data } = await loginUser(values);
+         setAuth(data);
          setError(null);
-         navigate('/');
+         navigate(redirect);
       } catch (error) {
          if (error.response && error.response.data.message)
             setError(error.response.data.message);
@@ -55,7 +61,7 @@ const Login = () => {
                Login
             </button>
             {error && <p style={{ color: 'red' }}>{error}</p>}
-            <Link to="/sign-up">
+            <Link to={`/sign-up?redirect=${redirect}`}>
                <p style={{ marginTop: '10px' }}>Not Registered ?</p>
             </Link>
          </form>
