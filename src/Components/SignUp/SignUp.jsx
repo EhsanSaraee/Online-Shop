@@ -1,9 +1,9 @@
 import { useFormik } from 'formik';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import Input from '../../Common/Input/Input';
-import { useAuthDispatch } from '../../Contexts/Auth/AuthProvider';
+import { useAuth, useAuthDispatch } from '../../Contexts/Auth/AuthProvider';
 import { useQuery } from '../../Hooks/useQuery';
 import { signUpUser } from '../../Services/signUpServices';
 import './SignUp.css';
@@ -43,6 +43,11 @@ const SignUp = () => {
    const setAuth = useAuthDispatch();
    const query = useQuery();
    const redirect = query.get('redirect') || '/';
+   const auth = useAuth();
+   
+   useEffect(() => {
+      if (auth) navigate(redirect);
+   }, [auth, redirect]);
 
    const onSubmit = async (values) => {
       const { name, email, password, phoneNumber } = values;
