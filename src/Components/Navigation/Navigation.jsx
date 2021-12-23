@@ -8,6 +8,7 @@ const Navigation = () => {
       <header className="mainNavigation">
          <nav>
             <ul>
+               <h1>Online Shopping</h1>
                <li>
                   <NavLink
                      to="/"
@@ -16,7 +17,9 @@ const Navigation = () => {
                      Home
                   </NavLink>
                </li>
-               <li className='cartLink'>
+            </ul>
+            <ul>
+               <li className="cartLink">
                   <NavLink
                      to="/cart"
                      className={(navLink) => (navLink.isActive ? 'active' : '')}
@@ -24,6 +27,14 @@ const Navigation = () => {
                      Cart
                   </NavLink>
                   <span>{cart.length}</span>
+               </li>
+               <li className="cartLink">
+                  <NavLink
+                     to="/login"
+                     className={(navLink) => (navLink.isActive ? 'active' : '')}
+                  >
+                     Login / Sign Up
+                  </NavLink>
                </li>
             </ul>
          </nav>
