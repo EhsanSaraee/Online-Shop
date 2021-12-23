@@ -1,16 +1,14 @@
 import { useFormik } from 'formik';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import Input from '../../Common/Input/Input';
+import { loginUser } from '../../Services/loginServices';
 import './login.css';
 
 const initialValues = {
    email: '',
    password: '',
-};
-
-const onSubmit = (values) => {
-   console.log(values);
 };
 
 const validationSchema = yup.object({
@@ -19,6 +17,20 @@ const validationSchema = yup.object({
 });
 
 const Login = () => {
+   const [error, setError] = useState(null);
+   const navigate = useNavigate();
+
+   const onSubmit = async (values) => {
+      try {
+         const { data } = await loginUser(values);
+         setError(null);
+         navigate('/');
+      } catch (error) {
+         if (error.response && error.response.data.message)
+            setError(error.response.data.message);
+      }
+   };
+
    const formik = useFormik({
       initialValues,
       onSubmit,
@@ -27,7 +39,7 @@ const Login = () => {
    });
    return (
       <section className="formContainer">
-         <form>
+         <form onSubmit={formik.handleSubmit}>
             <Input formik={formik} type="email" name="email" label="Email" />
             <Input
                formik={formik}
@@ -42,6 +54,7 @@ const Login = () => {
             >
                Login
             </button>
+            {error && <p style={{ color: 'red' }}>{error}</p>}
             <Link to="/sign-up">
                <p style={{ marginTop: '10px' }}>Not Registered ?</p>
             </Link>

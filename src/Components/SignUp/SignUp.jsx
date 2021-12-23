@@ -1,7 +1,9 @@
 import { useFormik } from 'formik';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import Input from '../../Common/Input/Input';
+import { signUpUser } from '../../Services/signUpServices';
 import './SignUp.css';
 
 const initialValues = {
@@ -12,38 +14,59 @@ const initialValues = {
    phoneNumber: '',
 };
 
-const onSubmit = (values) => {
-   console.log(values);
-};
-
 const validationSchema = yup.object({
    name: yup
       .string()
-      .required('Name is Required')
+      .required('Name is required')
       .min(6, 'Name length is not valid'),
-   email: yup.string().email('Invalid Email').required('Email is Required'),
-   password: yup.string().required('Password is Required'),
+   email: yup
+      .string()
+      .email('Invalid email format')
+      .required('Email is required'),
+   phoneNumber: yup
+      .string()
+      .required('Phone Number is required')
+      .matches(/^[0-9]{11}$/, 'Invalid Phone Number')
+      .nullable(),
+   password: yup.string().required('Password is required'),
    passwordConfirm: yup
       .string()
       .required('Password Confirmation is Required')
       .oneOf([yup.ref('password'), null], 'Passwords must match'),
-   phoneNumber: yup
-      .string()
-      .required('Phone Number is Required')
-      .matches(/^[0-9]{11}$/, 'Invalid phone number')
-      .nullable(),
 });
 
 const SignUp = () => {
+   const [error, setError] = useState(null);
+   const navigate = useNavigate();
+
+   const onSubmit = async (values) => {
+      const { name, email, password, phoneNumber } = values;
+      const userData = {
+         name,
+         email,
+         password,
+         phoneNumber,
+      };
+      try {
+         const { data } = await signUpUser(userData);
+         setError(null);
+         navigate('/');
+      } catch (error) {
+         if (error.response && error.response.data.message)
+            setError(error.response.data.message);
+      }
+   };
+
    const formik = useFormik({
       initialValues,
       onSubmit,
       validationSchema,
       validateOnMount: true,
    });
+
    return (
       <section className="formContainer">
-         <form>
+         <form onSubmit={formik.handleSubmit}>
             <Input formik={formik} type="text" name="name" label="Name" />
             <Input formik={formik} type="email" name="email" label="Email" />
             <Input
@@ -71,6 +94,7 @@ const SignUp = () => {
             >
                Submit
             </button>
+            {error && <p style={{ color: 'red' }}>{error}</p>}
             <Link to="/login">
                <p style={{ marginTop: '10px' }}>Already Registered ?</p>
             </Link>
